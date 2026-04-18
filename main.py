@@ -11,6 +11,8 @@ import time
 import yt_dlp
 import pymongo
 from pymongo import MongoClient
+from dotenv import load_dotenv
+load_dotenv()
 
 
 Client = MongoClient("mongodb+srv://kulisak:luki1012%40luki@kulisakdb.0afs4co.mongodb.net/")
@@ -395,7 +397,7 @@ try:
     bot.owner_id = BotConfig["OwnerID"]
     bot.command_prefix = BotConfig["CommandPrefix"]
     #? after config is loaded into bot, again, if no exception happened, run the bot.
-    bot.run(token=BotConfig["Token"], reconnect=BotConfig["Reconnect"])
+    bot.run(token=os.getenv("tkn"), reconnect=BotConfig["Reconnect"])
 
 #? if a exception happens, ill get output.
 except Exception:

@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-Client = MongoClient("mongodb+srv://kulisak:luki1012%40luki@kulisakdb.0afs4co.mongodb.net/")
+Client = MongoClient(os.getenv("mongodb"))
 database = Client["Synapse"]
 users = database["users"]
 
@@ -405,7 +405,8 @@ except Exception:
         "content": f"Error while running bot. \n ```{traceback.format_exc()}```",
         "username":"Synapse Error Handler Webhook"
     }
-    Send_Webhook = requests.post(url=BotConfig['WebhookURL'], json=WebhookData)
+    print(f"Error while running bot. \n ```{traceback.format_exc()}```")
+    Send_Webhook = requests.post(url=os.getenv("webhook"), json=WebhookData)
     if Send_Webhook.status_code == 204:
         print("Sent webhook about error.")
         exit(1)

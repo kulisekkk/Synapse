@@ -1,0 +1,20 @@
+{
+    "CommandPrefix": "!",
+    "Reconnect": true,
+    "OwnerID": 948646639961255936,
+    "WebhookURL": "https://discord.com/api/webhooks/1457380303877443738/bIlVJxWmBW_eSWVcNzI5itz3bwpjSnSawg4SB9ejtjXxmVdSU6_s2n8ru5quuz_EGN7y",
+    "testingmode": false,
+    "unwantedlinks": [
+        "pornhub.com",
+        "xvideos.com",
+        "xnnx.com",
+        "hentaicity.com",
+        "rule34.xxx"
+    ],
+    "nwords": [
+        "nigga",
+        "nigger",
+        "niga",
+        "niger"
+    ]
+}

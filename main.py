@@ -56,8 +56,9 @@ async def on_message(message: discord.Message):
         upsert=True
     )
     for nword in BotConfig["nwords"]:
-        if nword in message.content:
-            users.update_one(
+        content = message.content.lower()
+        if nword in content:
+            users.find_one_and_update(
                 {"_id": message.author.id},
                 {"$inc": {"nword": 1}}
             )
@@ -85,7 +86,7 @@ async def on_message(message: discord.Message):
         levelup_embed.set_image(
             url=message.author.avatar.url
         )
-        await bot.get_channel(1467122073632637050).send(embed=levelup_embed)
+        await bot.get_channel(1352971415397072988).send(embed=levelup_embed)
     await bot.process_commands(message)
 
 

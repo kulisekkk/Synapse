@@ -39,22 +39,20 @@ async def on_message(message: discord.Message):
         if unwantedlink in message.content:
             await message.delete()
             break
-    
 
-        
-
-    users.update_one(
-        {"_id": userID},
-        {
-            "$set": {
-                "level": 1,
-                "username": username,
-                "nword": 0
+    if userID not in users.find():
+        users.update_one(
+            {"_id": userID},
+            {
+                "$set": {
+                    "level": 1,
+                    "username": username,
+                    "nword": 0
+                },
+                "$inc": {"xp": 5}
             },
-            "$inc": {"xp": 5}
-        },
-        upsert=True
-    )
+            upsert=True
+        )
     for nword in BotConfig["nwords"]:
         content = message.content.lower()
         if nword in content:

@@ -34,13 +34,13 @@ async def on_message(message: discord.Message):
         return
     userID = int(message.author.id)
     username = str(message.author.name)
-    
+    user = users.find_one({"_id": userID})
     for unwantedlink in BotConfig["unwantedlinks"]:
         if unwantedlink in message.content:
             await message.delete()
             break
 
-    if userID not in users.find():
+    if user is None:
         users.update_one(
             {"_id": userID},
             {

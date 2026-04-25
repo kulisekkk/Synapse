@@ -60,14 +60,15 @@ async def on_message(message: discord.Message):
         if nword in content:
             users.find_one_and_update(
                 {"_id": message.author.id},
-                {"$inc": {"nword": 1}}
+                {"$inc": {"nword": 1}},
+                upsert=True
             )
     if users.find_one({"_id": message.author.id})["xp"] >= 100:
         users.update_one(
             {"_id": message.author.id},
             {
                 "$inc": {"level": 1},
-                "$set": {"xp": 0}
+                "$set": {"xp": 0},
             },
         )
         levelup_embed = discord.Embed(

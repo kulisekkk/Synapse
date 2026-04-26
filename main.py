@@ -346,26 +346,6 @@ async def level(i:discord.Interaction, user: discord.Member = None):
         title=f"**{i.user.name}'s level**",
         description=f"{i.user.name}'s current xp and level is "
     )
-    
-@bot.tree.command(name="nwordleaderboard", description="shows the nword leaderboard")
-async def NwordLeaderboard(i: discord.Interaction):
-    sorted_nwords = users.find().sort("nword", -1).to_list()
-    
-    nwords_embed = discord.Embed(
-        title="Nwords Leaderboard",
-        description=f"This shows the most racist person on this server lol niggers \n the top niggest nigger is <@{sorted_nwords[0]['_id']}>",
-        color=discord.Color.red(),
-        timestamp=discord.utils.utcnow(),
-    )
-    
-    index = 0
-    for _ in sorted_nwords:
-        if index >= 5:
-            break
-        nwords_embed.add_field(name=f"{_['username']}", value=f"{_['nword']}", inline=False)
-        index += 1
-        
-    await i.response.send_message(embed=nwords_embed)
 
 
 

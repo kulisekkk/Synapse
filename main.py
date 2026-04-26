@@ -53,14 +53,6 @@ async def on_message(message: discord.Message):
             },
             upsert=True
         )
-    for nword in BotConfig["nwords"]:
-        content = message.content.lower()
-        if nword in content:
-            users.find_one_and_update(
-                {"_id": message.author.id},
-                {"$inc": {"nword": 1}},
-                upsert=True
-            )
     if users.find_one({"_id": message.author.id})["xp"] >= 100:
         users.update_one(
             {"_id": message.author.id},

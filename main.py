@@ -29,7 +29,7 @@ bot = commands.Bot(command_prefix="!", intents=discord.Intents.all(), descriptio
 
 @bot.event
 async def on_message(message: discord.Message):
-    
+
     if message.author.bot:
         return
     userID = int(message.author.id)
@@ -111,11 +111,8 @@ async def play(interaction:discord.Interaction, url: str = None):
     
     bot_vc_client = interaction.guild.voice_client
 
-    
-    
     if not interaction.user.voice:
         return await interaction.response.send_message("you must be in a voice channel to use voice chat related commands!")
-    
     
     if url.startswith("http://"):
         return await interaction.response.send_message("Unsecure sites aren't allowed! check your link and make sure it has https://")

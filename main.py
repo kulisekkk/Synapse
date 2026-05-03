@@ -46,8 +46,7 @@ async def on_message(message: discord.Message):
             {
                 "$set": {
                     "level": 1,
-                    "username": username,
-                    "nword": 0
+                    "username": username
                 },
                 "$inc": {"xp": 5}
             },

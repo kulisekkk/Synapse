@@ -1,0 +1,6 @@
+yt_dlp
+discord
+pynacl
+davey
+pymongo 
+motor

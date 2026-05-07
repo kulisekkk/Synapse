@@ -1,4 +1,4 @@
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord import app_commands, FFmpegPCMAudio
 import discord
 import yt_dlp
@@ -25,6 +25,7 @@ with open("BotSettings.json", "r") as SettingsFile:
 
 
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all(), description="idk", owner_id=948646639961255936)
+
 
 
 @bot.event

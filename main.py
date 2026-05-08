@@ -280,20 +280,35 @@ async def stop(i: discord.Interaction):
 @bot.event
 async def on_member_join(member:discord.Member):
     join_embed = discord.Embed(
-        title="**New member**",
-        description=f"{member.name} has joined us!",
+        title="👋 New Member Joined",
+        description=f"Welcome to the server, {member.mention}!",
         timestamp=discord.utils.utcnow(),
-        color=discord.Color.greyple(),
+        color=discord.Color.brand_green()
     )
+
     join_embed.set_author(
-        name="Synapse",
-        icon_url=bot.user.avatar.url
+        name="Synapse Welcome",
+        icon_url=bot.user.display_avatar.url
     )
-    join_embed.set_image(
-        url=member.avatar.url
+
+    join_embed.set_thumbnail(
+        url=member.display_avatar.url
     )
+
+    join_embed.add_field(
+        name="Account Age", 
+        value=f"<t:{int(member.created_at.timestamp())}:R>", 
+        inline=True
+    )
+
+    join_embed.add_field(
+        name="Member Count", 
+        value=f"**` {member.guild.member_count} `**", 
+        inline=True
+    )
+
     join_embed.set_footer(
-        text=f"Welcome embed, made by Synapse and its dev 'Kulisekxd'"
+        text=f"ID: {member.id} • Made by Synapse"
     )
     join_channel = bot.get_channel(1352971409588224030)
     await join_channel.send(embed=join_embed)
@@ -302,20 +317,35 @@ async def on_member_join(member:discord.Member):
 @bot.event
 async def on_member_remove(member:discord.Member):
     leave_embed = discord.Embed(
-        title="**Member Left**",
-        description=f"{member.name} has left us!",
+        title="🏃 Member Left",
+        description=f"**{member.mention}** ({member.name}) has left the server.",
         timestamp=discord.utils.utcnow(),
-        color=discord.Color.red(),
+        color=discord.Color.red()
     )
+
     leave_embed.set_author(
-        name="Synapse",
-        icon_url=bot.user.avatar.url
+        name="Synapse Logging",
+        icon_url=bot.user.display_avatar.url
     )
-    leave_embed.set_image(
-        url=member.avatar.url
+
+    leave_embed.set_thumbnail(
+        url=member.display_avatar.url
     )
+
+    leave_embed.add_field(
+        name="Member Count", 
+        value=f"**` {member.guild.member_count} `**", 
+        inline=True
+    )
+
+    leave_embed.add_field(
+        name="Account Created", 
+        value=f"<t:{int(member.created_at.timestamp())}:R>", 
+        inline=True
+    )
+
     leave_embed.set_footer(
-        text=f"Leave embed, made by Synapse and its dev 'Kulisekxd'"
+        text=f"ID: {member.id} • Made by Synapse"
     )
     join_channel = bot.get_channel(1352971409588224030)
     await join_channel.send(embed=leave_embed)

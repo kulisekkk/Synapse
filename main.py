@@ -192,9 +192,9 @@ async def join(i: discord.Interaction):
         bot_vc_client = await i.user.voice.channel.connect()
         bot_vc_client.play(FFmpegPCMAudio("greet.mp3"))
         
-        await i.response.send_message("connected successfully without issues")
+        return await i.response.send_message("connected successfully without issues")
     else:
-        await i.response.send_message("you aren't connected to a voice channel!")
+        return await i.response.send_message("you aren't connected to a voice channel!")
     
     if bot_vc_client:
         return await i.response.send_message("Synapse is already connected to a channel!")

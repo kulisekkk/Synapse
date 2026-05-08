@@ -184,6 +184,8 @@ async def join(i: discord.Interaction):
         if i.channel.id != 1457378020817113162:
             await i.response.send_message("bot is in testing mode, request access to <#1457378020817113162> in <#1466807521741111297>")
             return
+    if i.user.voice.channel:
+        bot_vc_client = await i.user.voice.channel.connect()
         
     if bot_vc_client:
         return await i.response.send_message("Synapse is already connected to a channel!")
@@ -191,8 +193,7 @@ async def join(i: discord.Interaction):
     if i.user.bot:
         return
     
-    if i.user.voice.channel:
-        bot_vc_client = await i.user.voice.channel.connect()
+
         
         return await i.response.send_message("connected successfully without issues")
     else:

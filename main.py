@@ -41,7 +41,8 @@ async def on_message(message: discord.Message):
             await message.delete()
             break
 
-    if user is None:
+    hasGivenXP = False
+    if user is None and hasGivenXP is None:
         users.update_one(
             {"_id": userID},
             {
@@ -53,6 +54,12 @@ async def on_message(message: discord.Message):
             },
             upsert=True
         )
+        hasGivenXP = True
+    
+    if not hasGivenXP:
+        print("giving xp..")
+        users.update_one({"_id": userID},{"$inc": {"xp": 10}})
+        hasGivenXP = True
     if users.find_one({"_id": message.author.id})["xp"] >= 100:
         users.update_one(
             {"_id": message.author.id},
@@ -279,6 +286,7 @@ async def stop(i: discord.Interaction):
 
 @bot.event
 async def on_member_join(member:discord.Member):
+    MemberRole = bot.get_guild().get_role()
     join_embed = discord.Embed(
         title="👋 New Member Joined",
         description=f"Welcome to the server, {member.mention}!",

@@ -184,6 +184,9 @@ async def join(i: discord.Interaction):
         if i.channel.id != 1457378020817113162:
             await i.response.send_message("bot is in testing mode, request access to <#1457378020817113162> in <#1466807521741111297>")
             return
+        
+    if bot_vc_client:
+        return await i.response.send_message("Synapse is already connected to a channel!")
     
     if i.user.bot:
         return
@@ -195,9 +198,7 @@ async def join(i: discord.Interaction):
     else:
         return await i.response.send_message("you aren't connected to a voice channel!")
     
-    if bot_vc_client:
-        return await i.response.send_message("Synapse is already connected to a channel!")
-    
+
         
 @bot.tree.command(name="pause", description="Pause currently playing music")
 async def pause(i: discord.Interaction):

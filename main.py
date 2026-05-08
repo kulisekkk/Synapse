@@ -335,7 +335,10 @@ async def level(i:discord.Interaction, user: discord.Member = None):
         title=f"**{i.user.name}'s level**",
         description=f"{i.user.name}'s current xp and level is "
     )
-
+    final_embed.set_image(
+        url=i.user.avatar.url
+    )
+    return await i.response.send_message(embed=final_embed)
 
 
 @bot.tree.command(name="levelleaderboard", description="displays a level leaderboard")

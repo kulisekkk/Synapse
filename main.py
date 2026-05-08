@@ -186,7 +186,7 @@ async def join(i: discord.Interaction):
             return
     if i.user.voice.channel:
         bot_vc_client = await i.user.voice.channel.connect()
-        
+
     if bot_vc_client:
         return await i.response.send_message("Synapse is already connected to a channel!")
     
@@ -195,9 +195,8 @@ async def join(i: discord.Interaction):
     
 
         
-        return await i.response.send_message("connected successfully without issues")
-    else:
-        return await i.response.send_message("you aren't connected to a voice channel!")
+    return await i.response.send_message("connected successfully without issues")
+    return await i.response.send_message("you aren't connected to a voice channel!")
     
 
         

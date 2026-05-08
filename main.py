@@ -190,7 +190,6 @@ async def join(i: discord.Interaction):
     
     if i.user.voice.channel:
         bot_vc_client = await i.user.voice.channel.connect()
-        bot_vc_client.play(FFmpegPCMAudio("greet.mp3"))
         
         return await i.response.send_message("connected successfully without issues")
     else:

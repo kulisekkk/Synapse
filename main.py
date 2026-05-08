@@ -325,18 +325,35 @@ async def on_member_remove(member:discord.Member):
 @bot.tree.command(name="level", description="show your or another user's current level")
 async def level(i:discord.Interaction, user: discord.Member = None):
     if user is None:
-        UserID = int(i.user.id)
-    else:
-        UserID = int(user.id)
+        user = i.user
+
+    UserName = user.name
+    UserID = user.id
+    userEntry = users.find_one({"_id": UserID})
     
-    userXP = users.find_one({"_id": UserID})
-    
+    embed_color = user.color if hasattr(user, "color") else discord.Color.blue()
+
     final_embed = discord.Embed(
-        title=f"**{i.user.name}'s level**",
-        description=f"{i.user.name}'s current xp and level is "
+        title=f"📊 {user.display_name}'s Stats",
+        color=embed_color
     )
-    final_embed.set_image(
-        url=i.user.avatar.url
+
+    final_embed.set_thumbnail(url=user.display_avatar.url)
+
+    final_embed.add_field(
+        name="Level", 
+        value=f"**` {userEntry['level']} `**", 
+        inline=True
+    )
+    final_embed.add_field(
+        name="XP", 
+        value=f"**` {userEntry['xp']} `**", 
+        inline=True
+    )
+
+    final_embed.set_footer(
+        text=f"Requested by {i.user.display_name}", 
+        icon_url=i.user.display_avatar.url
     )
     return await i.response.send_message(embed=final_embed)
 

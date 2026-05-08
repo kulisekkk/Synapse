@@ -10,6 +10,11 @@ import requests
 import time
 import yt_dlp
 import pymongo
+<<<<<<< HEAD
+=======
+from antispam import AntiSpamHandler
+from antispam.enums import Library
+>>>>>>> 91ed3f4 (i)
 from pymongo import MongoClient
 from dotenv import load_dotenv
 load_dotenv()
@@ -25,7 +30,11 @@ with open("BotSettings.json", "r") as SettingsFile:
 
 
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all(), description="idk", owner_id=948646639961255936)
+<<<<<<< HEAD
 
+=======
+bot.handler = AntiSpamHandler(bot, library=Library.DPY)
+>>>>>>> 91ed3f4 (i)
 
 
 @bot.event
@@ -36,6 +45,12 @@ async def on_message(message: discord.Message):
     userID = int(message.author.id)
     username = str(message.author.name)
     user = users.find_one({"_id": userID})
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 91ed3f4 (i)
     for unwantedlink in BotConfig["unwantedlinks"]:
         if unwantedlink in message.content:
             await message.delete()
@@ -60,6 +75,33 @@ async def on_message(message: discord.Message):
         print("giving xp..")
         users.update_one({"_id": userID},{"$inc": {"xp": 10}})
         hasGivenXP = True
+<<<<<<< HEAD
+=======
+
+    tenrole = message.guild.get_role(1502276813089673466)
+    twentyrole = message.guild.get_role(1502276809981431888)
+    thirtyrole = message.guild.get_role(1502276809075462174)
+    fourtyrole = message.guild.get_role(1502276806563070012)
+    fiftyrole = message.guild.get_role(1502276803840970832)
+    
+    if user["level"] >= 9 and tenrole not in message.author.roles:
+        print(10)
+        await message.author.send("You've been awarded with role 'Rookie', Congrats! 🎉")
+        await message.author.add_roles(tenrole)
+    if user["level"] >= 19 and twentyrole not in message.author.roles:
+        await message.author.send("You've been awarded with role 'Apprentice', Congrats! 🎉")
+        await message.author.add_roles(twentyrole)
+    if user["level"] >= 29 and thirtyrole not in message.author.roles:
+        await message.author.send("You've been awarded with role 'Expert', Congrats! 🎉")
+        return message.author.add_roles(thirtyrole)
+    if user["level"] >= 39 and fourtyrole not in message.author.roles:
+        await message.author.send("You've been awarded with role 'Veteran', Congrats! 🎉")
+        return message.author.add_roles(fourtyrole)
+    if user["level"] >= 49 and fourtyrole not in message.author.roles:
+        await message.author.send("You've been awarded with role 'Ancient', Congrats! 🎉")
+        return message.author.add_roles(fiftyrole)
+    
+>>>>>>> 91ed3f4 (i)
     if users.find_one({"_id": message.author.id})["xp"] >= 100:
         users.update_one(
             {"_id": message.author.id},
@@ -85,6 +127,10 @@ async def on_message(message: discord.Message):
             url=message.author.avatar.url
         )
         await bot.get_channel(1352971415397072988).send(embed=levelup_embed)
+<<<<<<< HEAD
+=======
+    await bot.handler.propagate(message)
+>>>>>>> 91ed3f4 (i)
     await bot.process_commands(message)
 
 
@@ -286,7 +332,11 @@ async def stop(i: discord.Interaction):
 
 @bot.event
 async def on_member_join(member:discord.Member):
+<<<<<<< HEAD
     MemberRole = bot.get_guild().get_role()
+=======
+    zerorole = member.guild.get_role(1502276826947653632)
+>>>>>>> 91ed3f4 (i)
     join_embed = discord.Embed(
         title="👋 New Member Joined",
         description=f"Welcome to the server, {member.mention}!",

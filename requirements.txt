@@ -3,4 +3,9 @@ discord
 pynacl
 davey
 pymongo 
+<<<<<<< HEAD
 motor
+=======
+motor
+Discord-Anti-Spam
+>>>>>>> 91ed3f4 (i)
